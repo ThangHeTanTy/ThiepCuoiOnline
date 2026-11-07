@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Thiệp mời cưới</title>
+<meta property="og:title" content="Thiệp mời cưới">
+<meta property="og:image" content="assets/og.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&amp;family=Be+Vietnam+Pro:wght@400;500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="guest-mode">
+<main class="card-wrap">
+  <section class="envelope">
+    <div class="env-label">Thiệp mời cưới</div>
+    <div class="env-name">Mỗi thiệp là một link riêng</div>
+    <p class="env-from">Vui lòng mở đúng link mà cô dâu chú rể đã gửi cho bạn qua Zalo, Messenger hoặc email.</p>
+    <form id="f" class="rsvp" style="margin-top:16px;justify-items:center">
+      <label class="field" for="code" style="text-align:left;width:min(260px,100%)"><span>Hoặc nhập mã thiệp (5 ký tự)</span><input type="text" id="code" maxlength="12" autocomplete="off"></label>
+      <button class="btn solid" type="submit">Mở thiệp</button>
+    </form>
+  </section>
+</main>
+<script>
+document.getElementById('f').onsubmit = e => { e.preventDefault(); const c = document.getElementById('code').value.trim().toLowerCase(); if (/^[a-z0-9]{4,12}$/.test(c)) location.href = 'm/' + c + '/'; };
+</script>
+</body>
+</html>

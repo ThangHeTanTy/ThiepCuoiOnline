@@ -1,0 +1,111 @@
+{
+ "ok": true,
+ "cfg": {
+  "groom": "Minh Quân",
+  "bride": "Thu Hà",
+  "date": "2026-12-19",
+  "lunar": "",
+  "rsvpBy": "2026-12-05",
+  "showCrest": true,
+  "siteUrl": "https://ten-ban.github.io/thiep-cuoi-online/",
+  "livestream": "https://www.youtube.com/",
+  "helperName": "Anh Hoàng (em trai chú rể)",
+  "helperPhone": "0905 000 111",
+  "parents": {
+   "trai": {
+    "names": "Ông Nguyễn Văn Thành\nBà Lê Thị Hoa",
+    "place": "Hải Châu, Đà Nẵng"
+   },
+   "gai": {
+    "names": "Ông Trần Đức Nghĩa\nBà Phạm Thị Lan",
+    "place": "Hội An, Quảng Nam"
+   }
+  },
+  "bank": {
+   "trai": {
+    "bankName": "Vietcombank",
+    "bin": "970436",
+    "acc": "DEMO0001",
+    "holder": "NGUYEN MINH QUAN"
+   },
+   "gai": {
+    "bankName": "Techcombank",
+    "bin": "970407",
+    "acc": "DEMO0002",
+    "holder": "TRAN THU HA"
+   }
+  }
+ },
+ "events": [
+  {
+   "id": "th",
+   "name": "Lễ Thành Hôn",
+   "host": "trai",
+   "date": "2026-12-19",
+   "time": "10:30",
+   "place": "Số 45 Lê Lợi, Hải Châu, Đà Nẵng",
+   "map": "",
+   "note": ""
+  },
+  {
+   "id": "tiec",
+   "name": "Tiệc cưới",
+   "host": "chung",
+   "date": "2026-12-19",
+   "time": "18:00",
+   "place": "Sảnh Sen, Trung tâm tiệc cưới Sông Hàn, Đà Nẵng",
+   "map": "",
+   "note": "Đón khách 17:30"
+  }
+ ],
+ "allEventTimes": [
+  {
+   "date": "2026-12-19",
+   "time": "08:00"
+  },
+  {
+   "date": "2026-12-19",
+   "time": "10:30"
+  },
+  {
+   "date": "2026-12-19",
+   "time": "18:00"
+  }
+ ],
+ "route": {
+  "label": "Hà Nội",
+  "steps": [
+   [
+    "Bay Nội Bài → Đà Nẵng",
+    "Khoảng 1 giờ 20 phút bay. Nên chọn chuyến hạ cánh trước 15:00."
+   ],
+   [
+    "Sân bay → nơi ở / tiệc",
+    "Khoảng 10–15 phút taxi. Nếu chọn \"Cần xe đón\", nhà trai nhắn biển số xe trước một ngày."
+   ]
+  ]
+ },
+ "fromFar": true,
+ "guest": {
+  "code": "demo1",
+  "name": "Anh Tuấn & chị Mai",
+  "addr": "Anh chị",
+  "side": "trai",
+  "seats": 2,
+  "events": [
+   "th",
+   "tiec"
+  ],
+  "from": "hanoi",
+  "rsvp": null,
+  "wish": null,
+  "gift": null
+ },
+ "wishes": [
+  {
+   "name": "Bạn Khánh Vy",
+   "text": "Cuối cùng cũng chờ được ngày này! Yêu hai bạn",
+   "at": 1793800000000
+  }
+ ]
+}

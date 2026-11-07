@@ -1,0 +1,9 @@
+{
+  "name": "thiep-cuoi-online",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/build.mjs && npx --yes serve dist -l 5173"
+  }
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Quản lý thiệp mời</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../config.js"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="../assets/admin.js" defer></script>
+</head>
+<body class="admin-mode">
+
+<section id="loginView" class="login hidden">
+  <h1>Quản lý thiệp mời</h1>
+  <p class="sub">Đăng nhập bằng Gmail đã được cấp quyền. Hãy mở trang này bằng Chrome hoặc Safari, không mở trong Zalo/Messenger.</p>
+  <div id="gbtn"></div>
+  <p class="err" id="loginErr"></p>
+</section>
+
+<main id="adminView" class="admin hidden">
+  <header>
+    <div>
+      <h1 id="adminTitle">Quản lý thiệp mời</h1>
+      <p class="sub" id="adminSub"></p>
+    </div>
+    <div class="acts"><span class="role-badge" id="roleBadge"></span><button class="abtn" type="button" id="reload">Tải lại số liệu</button><button class="abtn" type="button" id="logout">Đăng xuất</button></div>
+  </header>
+  <section class="tiles" id="tiles" aria-label="Tổng quan"></section>
+  <div class="tabs" role="tablist" id="tabs">
+    <button role="tab" aria-selected="true" data-tab="list">Danh sách khách</button>
+    <button role="tab" aria-selected="false" data-tab="import">Nhập khách &amp; tạo thiệp</button>
+    <button role="tab" aria-selected="false" data-tab="wish">Lời chúc</button>
+    <button role="tab" aria-selected="false" data-tab="gift">Mừng cưới &amp; đối soát</button>
+    <button role="tab" aria-selected="false" data-tab="settings">Cài đặt</button>
+  </div>
+
+  <section class="panel" id="panel-list">
+    <div class="filters" id="filters"></div>
+    <div class="tbl-wrap"><table><thead><tr>
+      <th>Khách mời</th><th>Link thiệp riêng</th><th>Đã xem</th><th>Xác nhận</th><th>Hỗ trợ</th><th>Lời chúc</th><th>Mừng</th><th>Thao tác</th>
+    </tr></thead><tbody id="rows"></tbody></table></div>
+    <div class="acts"><button class="abtn" id="copyCsv" type="button">Sao chép bảng (CSV)</button><button class="abtn" id="copyRemind" type="button">Sao chép danh sách cần nhắc</button></div>
+  </section>
+
+  <section class="panel hidden" id="panel-import">
+    <div class="boxw">
+      <h3>Dán danh sách khách</h3>
+      <p id="importHelp"></p>
+      <label for="importText" class="sr">Danh sách khách</label>
+      <textarea id="importText" spellcheck="false" placeholder="Chị Phương Linh | Chị | gái | 1 | tiec | hcm"></textarea>
+      <div class="acts"><button class="abtn primary" id="doImport" type="button">Tạo thiệp cho các dòng này</button></div>
+      <p id="importMsg" class="sub"></p>
+      <p class="note">Khách mới được ghi vào tab Khach của Google Sheet và có mã ngay. Trang thiệp riêng của họ xuất hiện sau khi GitHub xuất bản lại (khoảng 1–3 phút). Bạn cũng có thể thêm khách trực tiếp trong Sheet rồi chọn menu Thiệp cưới → Xuất bản lại thiệp.</p>
+    </div>
+  </section>
+
+  <section class="panel hidden" id="panel-wish"><div class="list" id="wishList"></div></section>
+
+  <section class="panel hidden" id="panel-gift">
+    <div class="two">
+      <div class="boxw">
+        <h3>Đối soát sau hôn lễ</h3>
+        <p>Dán sao kê tải từ app/Internet Banking, mỗi giao dịch một dòng. Hệ thống tìm mã <b class="mono">MUNG CUOI xxxxx</b> và số tiền trên cùng dòng, ghi vào cột sao_ke_so_tien của Sheet.</p>
+        <label class="f" for="stmt"><span>Sao kê</span><textarea id="stmt" spellcheck="false"></textarea></label>
+        <div class="acts"><button class="abtn primary" id="doMatch" type="button">Đối soát</button></div>
+        <div id="matchResult"></div>
+      </div>
+      <div class="boxw">
+        <h3>Quà mừng đã ghi nhận</h3>
+        <div class="list" id="giftList"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel hidden" id="panel-settings">
+    <div class="boxw">
+      <h3>Sửa thông tin đám cưới</h3>
+      <p>Mọi thông tin (tên, ngày giờ, địa chỉ, link chỉ đường, số tài khoản, lộ trình, khách mời, người được quyền vào trang này) sửa trực tiếp trong Google Sheet. Thiệp đọc lại Sheet mỗi lần khách mở, nên sửa xong là khách thấy ngay.</p>
+      <ul class="sub" style="margin:0;padding-left:18px;line-height:1.8">
+        <li><b>CaiDat</b>: tên cô dâu chú rể, ngày cưới, âm lịch, hạn xác nhận, ngân hàng và số tài khoản, người hỗ trợ, livestream, địa chỉ trang.</li>
+        <li><b>NghiLe</b>: từng lễ, giờ, ngày, địa chỉ, link Google Maps.</li>
+        <li><b>LoTrinh</b>: hướng dẫn đường đi theo nơi khách xuất phát.</li>
+        <li><b>Khach</b>: danh sách khách, cách gọi, số ghế, lễ được mời.</li>
+        <li><b>Admin</b>: Gmail được vào trang này và vai trò.</li>
+      </ul>
+      <div class="acts" id="sheetActs"></div>
+      <p class="note">Chỉ cần xuất bản lại khi thêm khách mới hoặc đổi tên cô dâu chú rể (để ảnh và tiêu đề xem trước trên Zalo cập nhật).</p>
+    </div>
+  </section>
+</main>
+<div id="toast" class="toast hidden" role="status"></div>
+</body>
+</html>
