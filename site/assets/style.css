@@ -235,7 +235,8 @@ body.guest-mode{background-color:var(--lacquer);background-image:url("data:image
 @keyframes goldflow{from{background-position:0 0}to{background-position:-220% 0}}
 .art{background:var(--gold-foil);background-size:220% 100%;animation:goldflow 9s linear infinite;-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat}
 /* phong bì: rồng phượng âm dương (assets/long-phung-vong.svg), con dấu nằm đúng viên ngọc ở tâm */
-.emblem{position:relative;width:min(270px,90%);aspect-ratio:1420/1300;margin:16px auto 0}
+/* cỡ hình theo cả chiều rộng lẫn chiều cao màn hình để phong bì luôn nằm gọn trong một màn hình */
+.emblem{position:relative;width:min(90%,clamp(190px,calc((100vh - 290px) * 1.09),400px));width:min(90%,clamp(190px,calc((100svh - 290px) * 1.09),400px));aspect-ratio:1420/1300;margin:16px auto 0}
 .art-vong{--m:url(long-phung-vong.svg);position:absolute;inset:0}
 .emblem .seal{position:absolute;left:50.57%;top:49.14%;width:20%;height:auto;aspect-ratio:1;margin:0;transform:translate(-50%,-50%)}
 .emblem .seal svg{width:56%;height:56%}
@@ -245,3 +246,40 @@ body.guest-mode{background-color:var(--lacquer);background-image:url("data:image
 .art-lvpt{--m:url(long-vu-phuong-tuong.svg);width:min(360px,100%);aspect-ratio:1940/1776;margin:10px auto -6px;
   -webkit-mask:var(--m) center/contain no-repeat,linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent),linear-gradient(180deg,#000 82%,transparent);-webkit-mask-composite:source-in,source-in;
   mask:var(--m) center/contain no-repeat,linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent),linear-gradient(180deg,#000 82%,transparent);mask-composite:intersect,intersect}
+
+/* ---------- phong bì đóng / mở và bố cục theo thiết bị ---------- */
+[hidden]{display:none !important}
+.card-wrap.sealed{min-height:100vh;min-height:100svh;align-content:center;padding-top:16px;padding-bottom:16px}
+.sealed .envelope{width:min(600px,100%);margin:0 auto;cursor:pointer}
+.inside{display:grid;gap:22px}
+.details{display:grid;gap:22px;min-width:0}
+.couple:focus{outline:none}
+/* mở thiệp: con dấu xoay, vòng rồng phượng quay nửa vòng, phong bì mờ dần rồi ruột thiệp hiện lên */
+.art-vong{transition:transform .9s ease}
+.envelope.opened .art-vong{transform:rotate(180deg) scale(1.06)}
+.envelope.opened{animation:env-out .9s ease forwards;pointer-events:none}
+@keyframes env-out{0%,35%{opacity:1;transform:none}100%{opacity:0;transform:scale(1.06) translateY(-12px)}}
+.inside.reveal{animation:rise .8s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* tablet và laptop nhỏ: cột rộng hơn, chữ lớn hơn, QR nằm cạnh thông tin chuyển khoản */
+@media (min-width:700px){
+  .card-wrap{max-width:700px;padding:32px 28px 72px}
+  .sec{padding:28px 30px}
+  .couple h1{font-size:56px}
+  .sec h2{font-size:28px}
+  .gift-body{grid-template-columns:minmax(0,300px) 1fr;align-items:center}
+  .wishes{max-height:340px}
+}
+/* laptop và PC: hai cột; bên trái hình rồng phượng và tên cô dâu chú rể đứng yên, bên phải cuộn thông tin */
+@media (min-width:1080px){
+  .card-wrap{max-width:1240px;padding:0 40px}
+  .card-wrap.sealed{padding:24px 40px}
+  .inside{grid-template-columns:minmax(0,1fr) minmax(0,640px);gap:56px;align-items:start}
+  .cover{position:sticky;top:0;min-height:100vh;min-height:100svh;display:grid;align-content:center;padding:24px 0}
+  .art-lvpt{width:min(480px,100%,calc((100vh - 400px) * 1.09));width:min(480px,100%,calc((100svh - 400px) * 1.09))}
+  .couple h1{font-size:clamp(48px,4.4vw,64px)}
+  .details{padding:40px 0 72px}
+  .details > .wave:first-child{display:none}
+}
+@media (min-width:1080px) and (max-height:700px){.cover .countdown{display:none}}
