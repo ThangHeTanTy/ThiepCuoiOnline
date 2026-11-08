@@ -79,6 +79,9 @@
 
   /* ---------- hiển thị ---------- */
   let S = null, giftSide = null;
+  // Khách chỉ thấy phong bì; chạm con dấu mới mở ruột thiệp. Nhớ trong phiên để tải lại hoặc gửi xác nhận không phải mở lại.
+  const OPEN_KEY = 'opened-' + CODE;
+  let opened = (() => { try { return sessionStorage.getItem(OPEN_KEY) === '1'; } catch (e) { return false; } })() || /^#(rsvp|wish|gift)$/.test(location.hash);
 
   function render(keep) {
     waveN = 0;
@@ -92,8 +95,9 @@
     const dd = Math.floor(left / D), hh = Math.floor(left % D / H), mi = Math.floor(left % H / 6e4);
     document.title = `Thiệp mời ${x.name} · ${c.groom} & ${c.bride}`;
 
+    $('#app').classList.toggle('sealed', !opened);
     $('#app').innerHTML = `
-  <section class="envelope" id="env" aria-label="Phong bì thiệp mời">
+  <section class="envelope" id="env" aria-label="Phong bì thiệp mời" ${opened ? 'hidden' : ''}>
     <div class="env-label">Thiệp mời riêng gửi</div>
     <div class="env-name">${esc(x.name)}</div>
     <div class="env-from">từ ${esc(c.groom)} &amp; ${esc(c.bride)}</div>
@@ -101,7 +105,8 @@
     <div class="seal-hint">Chạm con dấu để mở thiệp</div>
   </section>
 
-  <section class="couple" id="top">
+  <div class="inside" id="inside" ${opened ? '' : 'hidden'}>
+  <div class="cover"><section class="couple" id="top" tabindex="-1">
     <div class="song-hy">SONG HỶ · LỄ THÀNH HÔN</div>
     ${c.showCrest ? crest() : ''}
     <h1>${esc(c.groom)}<span class="amp">&amp;</span>${esc(c.bride)}</h1>
@@ -109,7 +114,8 @@
     ${c.lunar ? `<div class="lunar">Nhằm ngày ${esc(c.lunar)} âm lịch</div>` : ''}
     ${target && left > 0 ? `<div class="countdown" aria-label="Thời gian còn lại"><div><b>${dd}</b><span>ngày</span></div><div><b>${hh}</b><span>giờ</span></div><div><b>${mi}</b><span>phút</span></div></div>` : ''}`
         : `<div class="date-tbd">Ngày cưới sẽ được báo sau</div>`}
-  </section>
+  </section></div>
+  <div class="details">
   ${wave()}
   <section class="sec invite-text">
     <div class="parents">
@@ -197,7 +203,8 @@
     <p class="lead">Buổi lễ được phát trực tiếp cho người thân ở xa.</p>
     <a class="btn" href="${esc(c.livestream)}" target="_blank" rel="noopener">Mở link xem trực tiếp</a>
   </section>` : ''}
-  <p class="foot">Thiệp riêng mã ${esc(x.code.toUpperCase())} · Xin đừng chuyển tiếp link này, vì phần xác nhận gắn với tên ${ad}.</p>`;
+  <p class="foot">Thiệp riêng mã ${esc(x.code.toUpperCase())} · Xin đừng chuyển tiếp link này, vì phần xác nhận gắn với tên ${ad}.</p>
+  </div></div>`;
 
     bind();
     if (keep === 'gift') openGift();
@@ -243,8 +250,21 @@
     $('#cpMemo').onclick = () => copy(memo, 'Đã sao chép nội dung chuyển khoản');
   }
 
+  function openCard() {
+    if (opened) return;
+    opened = true;
+    try { sessionStorage.setItem(OPEN_KEY, '1'); } catch (e) { }
+    $('#env').classList.add('opened');
+    const show = () => {
+      $('#env').hidden = true; $('#app').classList.remove('sealed');
+      const ins = $('#inside'); ins.hidden = false; ins.classList.add('reveal');
+      scrollTo(0, 0); $('#top').focus({ preventScroll: true });
+    };
+    if (still) show(); else setTimeout(show, 900);
+  }
+
   function bind() {
-    $('#seal').onclick = () => { $('#env').classList.add('opened'); $('#top').scrollIntoView({ behavior: still ? 'auto' : 'smooth' }); };
+    $('#env').onclick = openCard; // chạm con dấu hoặc bất kỳ đâu trên phong bì
     const ed = $('#editRsvp'); if (ed) ed.onclick = () => { $('#rsvpDone').classList.add('hidden'); $('#rsvpForm').classList.remove('hidden'); };
     const cr = $('#cancelRsvp'); if (cr) cr.onclick = () => { $('#rsvpForm').reset(); $('#rsvpForm').classList.add('hidden'); $('#rsvpDone').classList.remove('hidden'); backTo('#rsvp'); $('#editRsvp').focus(); };
     $('#rsvpForm').onsubmit = e => {
@@ -275,6 +295,7 @@
       const data = await load();
       if (!data.ok) throw new Error(data.error);
       S = data; render();
+      if (opened && location.hash) { const t = document.querySelector(location.hash); if (t) t.scrollIntoView(); }
       const k = 'viewed-' + CODE;
       if (!DEMO && !sessionStorage.getItem(k)) { sessionStorage.setItem(k, '1'); send('view', {}).catch(() => { }); }
     } catch (e) {

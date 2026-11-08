@@ -150,6 +150,7 @@ Chỉ cần **xuất bản lại** khi thêm khách mới hoặc đổi tên cô
 ## 9. Tùy biến giao diện
 
 - **Màu**: sửa khối `:root` ở đầu `site/assets/style.css`.
+- **Phong bì**: khách mở link chỉ thấy phong bì; chạm con dấu (hoặc bất kỳ đâu trên phong bì) mới mở ruột thiệp. Trong cùng một phiên trình duyệt, tải lại trang sẽ vào thẳng ruột thiệp. Giao diện tự căn theo màn hình: điện thoại một cột, tablet cột rộng hơn, laptop và PC chia hai cột (trái là hình và tên cô dâu chú rể, phải là thông tin).
 - **Hình rồng phượng**: phong bì dùng `site/assets/long-phung-vong.svg` (con dấu mở thiệp nằm ở viên ngọc giữa), phía dưới dùng `site/assets/long-vu-phuong-tuong.svg`, khung mã QR dùng `site/assets/khung-qr.svg`. Muốn thay hình, giữ nguyên tên file. Vùng có màu trong SVG được tô vàng ánh kim bằng CSS (lớp `.art` trong `style.css`). Ẩn hình phía dưới bằng `hien_huy_hieu` trong tab `CaiDat`.
 - **Ảnh xem trước khi gửi link**: thay `site/assets/og.jpg` bằng ảnh cưới, khổ 1200 × 630, dưới 300 KB.
 - **Câu chữ trên thiệp**: nằm trong hàm `render()` của `site/assets/guest.js`.
