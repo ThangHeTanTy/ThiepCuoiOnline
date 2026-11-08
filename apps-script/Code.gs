@@ -53,7 +53,7 @@ function setup() {
       ['am_lich', '', 'Ngày âm lịch tự nhập, ví dụ: 11 tháng 11 năm Bính Ngọ'],
       ['han_xac_nhan', '', 'Hạn khách xác nhận, dạng 2026-12-05'],
       ['so_khach_du_kien', 250, 'Chỉ hiện trên trang admin'],
-      ['hien_huy_hieu', true, 'TRUE: hiện huy hiệu rắn & dê nét vàng; FALSE: ẩn'],
+      ['hien_huy_hieu', true, 'TRUE: hiện hình rồng phượng nét vàng dưới phong bì; FALSE: ẩn'],
       ['dia_chi_trang', 'https://ten-ban.github.io/thiep-cuoi-online/', 'Địa chỉ gốc của trang (có dấu / ở cuối). Link khách = địa chỉ này + m/<mã>/'],
       ['livestream', '', 'Link xem trực tiếp, để trống thì ẩn mục này'],
       ['nguoi_ho_tro', 'Anh Hoàng (em trai chú rể)', 'Người hỗ trợ khách ở xa'],

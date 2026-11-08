@@ -63,15 +63,18 @@
       <stop offset="0" stop-color="#b8863a"/><stop offset=".35" stop-color="#f7e3a6"/><stop offset=".5" stop-color="#fff4cf"/><stop offset=".65" stop-color="#e9c46f"/><stop offset="1" stop-color="#b8863a"/>
       ${still ? '' : '<animate attributeName="x1" values="-520;520" dur="7s" repeatCount="indefinite"/><animate attributeName="x2" values="0;1040" dur="7s" repeatCount="indefinite"/>'}</linearGradient></defs>`;
   }
-  const CREST = "<circle cx=\"260\" cy=\"124\" r=\"74\" fill=\"none\" stroke=\"url(#GID)\" stroke-width=\"1.6\"/><circle cx=\"260\" cy=\"124\" r=\"68\" fill=\"none\" stroke=\"url(#GID)\" stroke-width=\".8\"/><text x=\"260\" y=\"146\" text-anchor=\"middle\" font-size=\"64\" fill=\"url(#GID)\" style=\"font-family:serif\">囍</text><path d=\"M327.9 56.1 L329.8 58.1 L331.6 60.0 L333.4 62.1 L335.1 64.2 L336.7 66.3 L338.3 68.5 L339.9 70.7 L341.3 73.0 L342.7 75.3 L344.1 77.6 L345.3 80.0 L346.5 82.4 L347.7 84.9 L348.7 87.4 L349.7 89.9 L350.7 92.4 L351.5 95.0 L352.3 97.6 L353.0 100.2 L353.6 102.8 L354.2 105.5 L354.7 108.1 L355.1 110.8 L355.4 113.5 L355.7 116.2 L355.9 118.9 L356.0 121.5 L356.0 124.3 L356.0 127.0 L355.8 129.7 L355.6 132.3 L355.4 135.0 L355.0 137.7 L354.6 140.4 L354.1 143.0 L353.5 145.7 L352.9 148.3 L352.2 150.9 L351.4 153.5 L350.5 156.0 L349.6 158.6 L348.5 161.1 L347.5 163.6 L346.3 166.0 L345.1 168.4 L343.8 170.8 L342.5 173.1 L341.1 175.4 L339.6 177.7 L338.0 179.9 L336.4 182.1 L334.8 184.2 L333.0 186.3 L331.3 188.3 L329.4 190.3 L327.5 192.2 L325.6 194.1 L323.6 195.9 L321.5 197.7 L319.4 199.4 L317.3 201.0 L315.1 202.6 L312.9 204.1 L310.6 205.6 L308.3 207.0 L305.9 208.3 L303.5 209.6 L301.1 210.8 L298.6 211.9 L296.2 212.9 L293.6 213.9 L291.1 214.8 L288.5 215.7 L285.9 216.4 L283.3 217.1 L280.7 217.7 L278.1 218.3 L275.4 218.8 L272.7 219.2 L270.0 219.5\" fill=\"none\" stroke=\"url(#GID)\" stroke-width=\"5\" stroke-linecap=\"round\"/><path d=\"M327.9 56.1 L329.8 58.1 L331.6 60.0 L333.4 62.1 L335.1 64.2 L336.7 66.3 L338.3 68.5 L339.9 70.7 L341.3 73.0 L342.7 75.3 L344.1 77.6 L345.3 80.0 L346.5 82.4 L347.7 84.9 L348.7 87.4 L349.7 89.9 L350.7 92.4 L351.5 95.0 L352.3 97.6 L353.0 100.2 L353.6 102.8 L354.2 105.5 L354.7 108.1 L355.1 110.8 L355.4 113.5 L355.7 116.2 L355.9 118.9 L356.0 121.5 L356.0 124.3 L356.0 127.0 L355.8 129.7 L355.6 132.3 L355.4 135.0 L355.0 137.7 L354.6 140.4 L354.1 143.0 L353.5 145.7 L352.9 148.3 L352.2 150.9 L351.4 153.5 L350.5 156.0 L349.6 158.6 L348.5 161.1 L347.5 163.6 L346.3 166.0 L345.1 168.4 L343.8 170.8 L342.5 173.1 L341.1 175.4 L339.6 177.7 L338.0 179.9 L336.4 182.1 L334.8 184.2 L333.0 186.3 L331.3 188.3 L329.4 190.3 L327.5 192.2 L325.6 194.1 L323.6 195.9 L321.5 197.7 L319.4 199.4 L317.3 201.0 L315.1 202.6 L312.9 204.1 L310.6 205.6 L308.3 207.0 L305.9 208.3 L303.5 209.6 L301.1 210.8 L298.6 211.9 L296.2 212.9 L293.6 213.9 L291.1 214.8 L288.5 215.7 L285.9 216.4 L283.3 217.1 L280.7 217.7 L278.1 218.3 L275.4 218.8 L272.7 219.2 L270.0 219.5\" fill=\"none\" stroke=\"#6b1218\" stroke-width=\"2.4\" stroke-linecap=\"round\"/><g fill=\"none\" stroke=\"url(#GID)\" stroke-linecap=\"round\"><path d=\"M250.0 219.0 L247.9 218.5 L245.8 218.0 L243.7 217.6 L241.6 217.0 L239.5 216.5 L237.4 215.9 L235.4 215.2 L233.4 214.5 L231.4 213.8 L229.4 213.0 L227.4 212.2 L225.4 211.3 L223.5 210.4 L221.6 209.5 L219.7 208.5 L217.8 207.4 L216.0 206.4 L214.2 205.3 L212.4 204.1 L210.7 202.9 L208.9 201.7 L207.2 200.5 L205.6 199.2 L203.9 197.8 L202.3 196.5 L200.8 195.1 L199.2 193.7 L197.7 192.2 L196.3 190.7 L194.8 189.2 L193.4 187.6 L192.1 186.0 L190.7 184.4 L189.5 182.8 L188.2 181.1 L187.0 179.4 L185.8 177.7 L184.7 175.9 L183.6 174.2 L182.6 172.4 L181.6 170.6 L180.6 168.7 L179.7 166.9 L178.8 165.0 L178.0 163.1 L177.2 161.2 L176.4 159.3 L175.7 157.4 L175.1 155.4 L174.4 153.5 L173.9 151.5 L173.3 149.5 L172.9 147.5 L172.4 145.5 L172.0 143.5 L171.7 141.5 L171.4 139.5 L171.2 137.4 L171.0 135.4 L170.8 133.4 L170.6 131.3 L170.5 129.3 L170.4 127.3 L170.3 125.3 L170.3 123.2 L170.3 121.2 L170.4 119.1 L170.6 117.1 L170.7 115.1 L171.0 113.1 L171.2 111.1 L171.6 109.0 L171.9 107.0 L172.3 105.0 L172.8 103.1 L173.3 101.1 L173.8 99.1 L174.4 97.2 L175.0 95.2 L175.7 93.3 L176.4 91.4 L177.2 89.5 L178.0 87.7 L178.8 85.8 L179.7 84.0 L180.7 82.2 L181.6 80.4 L182.6 78.6 L183.7 76.9 L184.8 75.1 L185.9 73.5 L187.1 71.8 L188.3 70.1 L189.5 68.5 L190.8 66.9 L192.1 65.4 L193.4 63.9 L194.8 62.4 L196.2 60.9 L197.7 59.5 L199.2 58.1 L200.7 56.7 L202.2 55.3 L203.7 53.9 L205.2 52.6 L206.8 51.3 L208.4 50.0 L210.0 48.8 L211.7 47.6 L213.4 46.4 L215.1 45.3 L216.9 44.2 L218.6 43.2 L220.4 42.2 L222.3 41.2 L224.1 40.3 L226.0 39.4 L227.9 38.5 L229.8 37.7 L231.8 37.0 L228.9 28.4 L226.8 29.1 L224.6 29.7 L222.4 30.5 L220.3 31.3 L218.1 32.1 L216.0 33.0 L213.9 33.9 L211.8 34.9 L209.8 35.9 L207.7 37.0 L205.7 38.1 L203.7 39.3 L201.8 40.5 L199.8 41.8 L197.9 43.1 L196.0 44.4 L194.2 45.8 L192.3 47.3 L190.6 48.8 L188.9 50.4 L187.3 52.0 L185.7 53.7 L184.1 55.4 L182.6 57.2 L181.1 58.9 L179.6 60.7 L178.2 62.6 L176.8 64.4 L175.5 66.4 L174.2 68.3 L173.0 70.2 L171.8 72.2 L170.6 74.2 L169.5 76.3 L168.4 78.4 L167.4 80.4 L166.5 82.6 L165.6 84.7 L164.7 86.8 L163.9 89.0 L163.1 91.2 L162.4 93.4 L161.7 95.6 L161.1 97.9 L160.5 100.1 L160.0 102.4 L159.5 104.7 L159.1 106.9 L158.8 109.2 L158.5 111.5 L158.2 113.8 L158.0 116.2 L157.8 118.5 L157.8 120.8 L157.7 123.1 L157.7 125.4 L157.8 127.7 L157.9 130.1 L158.0 132.4 L158.3 134.7 L158.6 137.0 L159.0 139.3 L159.5 141.5 L160.0 143.8 L160.5 146.1 L161.1 148.3 L161.8 150.5 L162.5 152.7 L163.2 154.9 L164.0 157.0 L164.9 159.2 L165.8 161.3 L166.7 163.4 L167.7 165.5 L168.7 167.5 L169.8 169.6 L171.0 171.5 L172.1 173.5 L173.3 175.5 L174.6 177.4 L175.9 179.2 L177.3 181.1 L178.6 182.9 L180.1 184.7 L181.5 186.4 L183.0 188.1 L184.6 189.8 L186.1 191.4 L187.8 193.0 L189.4 194.6 L191.1 196.1 L192.8 197.6 L194.6 199.0 L196.3 200.4 L198.1 201.8 L200.0 203.1 L201.8 204.4 L203.7 205.6 L205.6 206.7 L207.6 207.9 L209.6 209.0 L211.5 210.0 L213.6 211.0 L215.6 211.9 L217.6 212.8 L219.7 213.7 L221.8 214.5 L223.9 215.2 L226.0 215.9 L228.1 216.6 L230.3 217.1 L232.4 217.7 L234.6 218.2 L236.8 218.6 L238.9 219.0 L241.1 219.3 L243.3 219.6 L245.5 219.8 L247.7 219.9 L249.9 220.0 Z\" fill=\"#6b1218\" stroke-width=\"1.4\"/><path d=\"M215.0 206.6L212.0 207.2L213.1 210.0 M204.7 199.6L201.0 199.8L201.8 203.4 M195.4 191.3L191.1 190.9L191.5 195.2 M187.4 181.9L182.6 180.8L182.4 185.7 M180.6 171.5L175.5 169.6L174.5 175.0 M175.3 160.4L170.0 157.5L168.2 163.3 M171.5 148.8L166.3 144.9L163.4 150.8 M169.4 136.7L164.3 131.8L160.3 137.7 M168.5 124.3L164.1 118.7L159.4 124.0 M169.3 111.9L165.7 105.8L160.3 110.4 M171.8 99.7L169.1 93.1L163.1 97.0 M175.9 87.9L174.1 81.1L167.7 84.1 M181.6 76.8L180.7 69.8L174.0 71.9 M188.7 66.6L188.8 59.6L181.8 60.7 M197.1 57.5L198.2 50.5L191.1 50.7 M206.8 49.0L208.6 42.9L202.2 42.2\" stroke-width=\".9\"/></g><g transform=\"translate(230.3,32.7) rotate(-18.7) scale(0.9)\" fill=\"none\" stroke=\"url(#GID)\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M-5 -6 C3 -12 18 -10 27 0 C18 10 3 12 -5 6 C-2 2 -2 -2 -5 -6 Z\" fill=\"#6b1218\" stroke-width=\"1.6\"/><path d=\"M8 -5 C12 -7 18 -6 21 -2\" stroke-width=\"1\"/><circle cx=\"16\" cy=\"-2.6\" r=\"1.8\" fill=\"url(#GID)\" stroke=\"none\"/><path d=\"M27 0 L37 0 M37 0 L42 -3.5 M37 0 L42 3.5\" stroke-width=\"1.2\"/></g><path d=\"M252 222 c4 6 12 6 16 0 c-4 -6 -12 -6 -16 0z\" fill=\"none\" stroke=\"url(#GID)\" stroke-width=\"1.4\"/><g transform=\"translate(266,-2) scale(.85)\"><g fill=\"none\" stroke=\"url(#GID)\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n<path d=\"M62 40 C56 36 46 38 38 44 C32 48 28 54 30 58 C32 61 38 60 42 58 C46 58 50 58 52 58\"/>\n<path d=\"M60 38 C62 22 76 12 92 14 C100 15 104 22 100 28\"/><path d=\"M65 41 C69 27 82 19 96 23\" stroke-width=\"1.4\"/>\n<path d=\"M64 46 C72 46 80 50 84 54 C76 54 70 52 64 50\"/>\n<path d=\"M45 46 q3.5 -2.4 7 0 q-3.5 2 -7 0\" stroke-width=\"1.4\"/>\n<path d=\"M36 60 C34 68 36 76 40 84 C40 75 42 67 44 60\"/>\n<path d=\"M62 40 C70 52 76 62 80 76\"/><path d=\"M52 58 C56 70 58 80 58 90\"/>\n<path d=\"M58 90 C64 86 74 84 80 76\" stroke-width=\"1.4\"/></g></g>";
-  function crest() { return `<svg class="zodiac" viewBox="150 0 220 234" role="img" aria-label="Huy hiệu nét vàng: rắn và dê ôm quanh chữ Hỷ">${goldDefs('gold-z')}${CREST.replaceAll('GID', 'gold-z')}</svg>`; }
+  /* Hình rồng phượng nằm trong assets/*.svg (vẽ lại từ mẫu đã chọn), tô vàng ánh kim bằng CSS mask, xem lớp .art trong style.css. */
+  const HY = 'M8 10H92M25 2V22M75 2V22M14 22H86M13 30h24v13h-24zM63 30h24v13h-24zM18 49l3 6M32 49l-3 6M68 49l3 6M82 49l-3 6M4 60H96M13 68h24v26h-24zM63 68h24v26h-24z'; // chữ 囍 vẽ bằng nét, để mọi máy hiển thị giống nhau
+  function hySeal(size = 30) { return `<svg viewBox="0 0 100 100" width="${size}" height="${size}" aria-hidden="true"><path d="${HY}" fill="none" stroke="#8e1a1f" stroke-width="7" stroke-linecap="square"/></svg>`; }
+  function crest() { return '<div class="art art-lvpt" role="img" aria-label="Long Vũ Phượng Tường: rồng và phượng múa, dải lụa vàng ôm đôi nhẫn cưới"></div>'; }
   let waveN = 0;
   function wave() {
     const id = 'gold-w' + (waveN++);
     return `<svg class="wave" viewBox="0 0 520 22" preserveAspectRatio="none" aria-hidden="true">${goldDefs(id)}
       <path d="M0 11 C40 2 70 20 110 11 S180 2 220 11" fill="none" stroke="url(#${id})" stroke-width="1.4"/>
       <path d="M300 11 C340 20 370 2 410 11 S480 20 520 11" fill="none" stroke="url(#${id})" stroke-width="1.4"/>
-      <path d="M260 4 L267 11 L260 18 L253 11 Z" fill="url(#${id})"/></svg>`;
+      <circle cx="260" cy="11" r="5" fill="url(#${id})"/><circle cx="260" cy="11" r="8.5" fill="none" stroke="url(#${id})" stroke-width=".9"/>
+      <path d="M249 9 c-4 -4 -9 -3 -10 1 M271 9 c4 -4 9 -3 10 1 M249 13 c-4 4 -9 3 -10 -1 M271 13 c4 4 9 3 10 -1" fill="none" stroke="url(#${id})" stroke-width="1"/></svg>`;
   }
 
   /* ---------- hiển thị ---------- */
@@ -94,7 +97,7 @@
     <div class="env-label">Thiệp mời riêng gửi</div>
     <div class="env-name">${esc(x.name)}</div>
     <div class="env-from">từ ${esc(c.groom)} &amp; ${esc(c.bride)}</div>
-    <button class="seal" id="seal" type="button" aria-label="Mở thiệp">囍</button>
+    <div class="emblem" role="img" aria-label="Rồng phượng uốn quanh viên ngọc theo thế âm dương"><div class="art art-vong"></div><button class="seal" id="seal" type="button" aria-label="Mở thiệp">${hySeal()}</button></div>
     <div class="seal-hint">Chạm con dấu để mở thiệp</div>
   </section>
 
@@ -109,13 +112,13 @@
   </section>
   ${wave()}
   <section class="sec invite-text">
-    <p>Trân trọng kính mời</p>
-    <span class="who">${esc(x.addr)}${x.addr.toLowerCase() === x.name.toLowerCase() ? '' : ` · ${esc(x.name)}`}</span>
-    <p>đến chung vui cùng gia đình chúng tôi trong ngày ${esc(c.groom)} và ${esc(c.bride)} nên duyên vợ chồng.<br>Sự hiện diện của ${ad} là niềm vinh hạnh cho hai gia đình.</p>
     <div class="parents">
       <div><b>Nhà trai</b>${esc(c.parents.trai.names).replace(/\n/g, '<br>')}<br><span class="muted">${esc(c.parents.trai.place)}</span></div>
       <div><b>Nhà gái</b>${esc(c.parents.gai.names).replace(/\n/g, '<br>')}<br><span class="muted">${esc(c.parents.gai.place)}</span></div>
     </div>
+    <p>Trân trọng kính mời</p>
+    <span class="who">${esc(x.addr)}${x.addr.toLowerCase() === x.name.toLowerCase() ? '' : ` · ${esc(x.name)}`}</span>
+    <p>đến chung vui cùng gia đình chúng tôi trong ngày ${esc(c.groom)} và ${esc(c.bride)} nên duyên vợ chồng.<br>Sự hiện diện của ${ad} là niềm vinh hạnh cho hai gia đình.</p>
   </section>
   ${wave()}
   <section class="sec">
@@ -181,7 +184,7 @@
       <div class="gift-tabs" role="group" aria-label="Chọn bên nhận">
         ${['trai', 'gai'].filter(s => c.bank[s].acc).map(s => `<button type="button" data-side="${s}" aria-pressed="${giftSide === s}">Mừng nhà ${s === 'trai' ? 'trai' : 'gái'}</button>`).join('')}
       </div>
-      <div class="gift-body"><div class="qr-box"><div id="qr"></div></div><div class="bank" id="bankInfo"></div></div>
+      <div class="gift-body"><div class="qr-frame"><div class="qr-box"><div id="qr"></div><span class="qr-hy" id="qrHy">${hySeal(40)}</span></div></div><div class="bank" id="bankInfo"></div></div>
       <div class="gift-foot">
         <label class="field" for="gamt"><span>Số tiền đã gửi (không bắt buộc)</span><input type="number" id="gamt" min="0" step="50000" placeholder="Ví dụ 500000" value="${x.gift?.amount || ''}"></label>
         <div class="chips"><button class="btn solid" type="button" id="sentGift">${x.gift?.selfReported ? 'Đã báo gửi · cập nhật' : 'Tôi đã chuyển khoản'}</button><button class="btn" type="button" id="closeGift">Thu gọn</button></div>
@@ -225,8 +228,11 @@
     const b = c.bank[giftSide], memo = giftMemo(S.guest.code), box = $('#qr');
     document.querySelectorAll('.gift-tabs button').forEach(o => o.setAttribute('aria-pressed', o.dataset.side === giftSide));
     box.innerHTML = '';
-    if (window.QRCode && b.bin) new QRCode(box, { text: vietqr({ bin: b.bin, acc: b.acc, memo }), width: 164, height: 164, correctLevel: QRCode.CorrectLevel.M });
-    else box.innerHTML = '<div class="qr-missing">Không tạo được mã QR. Hãy chuyển khoản theo thông tin bên cạnh.</div>';
+    const ok = !!(window.QRCode && b.bin);
+    // mức sửa lỗi H để chữ 囍 che giữa mã vẫn quét được; vẽ 328px rồi thu nhỏ cho nét trên màn hình sắc
+    if (ok) new QRCode(box, { text: vietqr({ bin: b.bin, acc: b.acc, memo }), width: 328, height: 328, colorDark: '#3d0a0d', colorLight: '#fffaf0', correctLevel: QRCode.CorrectLevel.H });
+    else box.innerHTML = '<div class="qr-missing">Không tạo được mã QR. Hãy chuyển khoản theo thông tin bên dưới.</div>';
+    $('#qrHy').classList.toggle('hidden', !ok);
     $('#bankInfo').innerHTML = `<dl>
       <dt>Ngân hàng</dt><dd>${esc(b.bankName || BANK_NAMES[b.bin] || b.bin)}</dd>
       <dt>Chủ TK</dt><dd>${esc(b.holder)}</dd>
