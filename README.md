@@ -15,7 +15,7 @@ thiep-cuoi-online/
 │   ├── index.html         ← trang chung (khách nhập mã nếu mở nhầm)
 │   ├── config.js          ← cấu hình khi chạy thử trên máy
 │   ├── admin/index.html   ← trang quản trị
-│   └── assets/            ← style.css, guest.js, admin.js, og.jpg (ảnh xem trước), demo.json
+│   └── assets/            ← style.css, guest.js, admin.js, og.jpg (ảnh xem trước), demo.json, hình rồng phượng *.svg
 ├── templates/thiep.html   ← khuôn trang riêng của từng khách
 ├── scripts/build.mjs      ← tạo dist/m/<mã>/index.html cho từng khách
 └── .github/workflows/deploy.yml  ← GitHub tự build và xuất bản
@@ -150,8 +150,7 @@ Chỉ cần **xuất bản lại** khi thêm khách mới hoặc đổi tên cô
 ## 9. Tùy biến giao diện
 
 - **Màu**: sửa khối `:root` ở đầu `site/assets/style.css`.
-- **Huy hiệu**: bật hoặc tắt bằng `hien_huy_hieu` trong tab `CaiDat`. Chọn kiểu bằng `kieu_huy_hieu`: `long_phung` (rồng & phượng chầu chữ Hỷ, mặc định) hoặc `con_giap` (rắn & dê). Với kiểu Long Phụng, rồng đánh dấu nhà trai và phượng đánh dấu nhà gái ở phần bố mẹ và quà mừng. Hình nằm trong các biến `LONG_PHUNG` và `CREST` của `site/assets/guest.js`.
-  - Sheet tạo trước bản này chưa có dòng `kieu_huy_hieu`: thêm một dòng vào tab `CaiDat` nếu muốn quay về `con_giap`, không thêm thì thiệp dùng Long Phụng.
+- **Hình rồng phượng**: phong bì dùng `site/assets/long-phung-vong.svg` (con dấu mở thiệp nằm ở viên ngọc giữa), phía dưới dùng `site/assets/long-vu-phuong-tuong.svg`, khung mã QR dùng `site/assets/khung-qr.svg`. Muốn thay hình, giữ nguyên tên file. Vùng có màu trong SVG được tô vàng ánh kim bằng CSS (lớp `.art` trong `style.css`). Ẩn hình phía dưới bằng `hien_huy_hieu` trong tab `CaiDat`.
 - **Ảnh xem trước khi gửi link**: thay `site/assets/og.jpg` bằng ảnh cưới, khổ 1200 × 630, dưới 300 KB.
 - **Câu chữ trên thiệp**: nằm trong hàm `render()` của `site/assets/guest.js`.
 

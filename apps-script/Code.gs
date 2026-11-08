@@ -53,8 +53,7 @@ function setup() {
       ['am_lich', '', 'Ngày âm lịch tự nhập, ví dụ: 11 tháng 11 năm Bính Ngọ'],
       ['han_xac_nhan', '', 'Hạn khách xác nhận, dạng 2026-12-05'],
       ['so_khach_du_kien', 250, 'Chỉ hiện trên trang admin'],
-      ['hien_huy_hieu', true, 'TRUE: hiện huy hiệu nét vàng; FALSE: ẩn'],
-      ['kieu_huy_hieu', 'long_phung', 'long_phung: rồng & phượng chầu chữ Hỷ (mặc định); con_giap: rắn & dê'],
+      ['hien_huy_hieu', true, 'TRUE: hiện hình rồng phượng nét vàng dưới phong bì; FALSE: ẩn'],
       ['dia_chi_trang', 'https://ten-ban.github.io/thiep-cuoi-online/', 'Địa chỉ gốc của trang (có dấu / ở cuối). Link khách = địa chỉ này + m/<mã>/'],
       ['livestream', '', 'Link xem trực tiếp, để trống thì ẩn mục này'],
       ['nguoi_ho_tro', 'Anh Hoàng (em trai chú rể)', 'Người hỗ trợ khách ở xa'],
@@ -176,7 +175,6 @@ function readConfig_() {
   return {
     groom: str_(kv.chu_re), bride: str_(kv.co_dau), date: dateStr_(kv.ngay_cuoi), lunar: str_(kv.am_lich),
     rsvpBy: dateStr_(kv.han_xac_nhan), expected: Number(kv.so_khach_du_kien) || 0, showCrest: kv.hien_huy_hieu === '' ? true : bool_(kv.hien_huy_hieu),
-    crestStyle: noAccent_(kv.kieu_huy_hieu).toLowerCase().replace(/[\s-]+/g, '_') === 'con_giap' ? 'con_giap' : 'long_phung',
     siteUrl: site, livestream: str_(kv.livestream), helperName: str_(kv.nguoi_ho_tro), helperPhone: str_(kv.sdt_ho_tro),
     parents: { trai: { names: str_(kv.nha_trai_bo_me), place: str_(kv.nha_trai_dia_chi) }, gai: { names: str_(kv.nha_gai_bo_me), place: str_(kv.nha_gai_dia_chi) } },
     bank: { trai: bank('trai'), gai: bank('gai') }
