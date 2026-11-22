@@ -1,6 +1,6 @@
 // Dựng thư mục dist/ để đưa lên GitHub Pages: chép site/, ghi config.js, tạo m/<mã>/index.html cho từng khách.
 // Chạy: node scripts/build.mjs   (không có APPS_SCRIPT_URL + BUILD_KEY thì tạo bản thử với dữ liệu mẫu)
-import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -36,6 +36,19 @@ const landing = await readFile(join(ROOT, 'site', 'index.html'), 'utf8');
 await writeFile(join(DIST, '404.html'), site !== '/' ? landing.replace('<head>', `<head>\n<base href="${esc(site)}">`) : landing);
 await writeFile(join(DIST, 'config.js'),
   `window.THIEP = Object.assign({}, window.THIEP, ${JSON.stringify({ apiUrl: live ? APPS_SCRIPT_URL : '', googleClientId: GOOGLE_CLIENT_ID, demo: !live })});\n`);
+
+// Ảnh cưới: mọi ảnh trong site/anh-cuoi/ được trình chiếu theo thứ tự tên file (01.jpg, 02.jpg, …).
+const PHOTO_DIR = join(ROOT, 'site', 'anh-cuoi');
+const photos = [];
+for (const f of (await readdir(PHOTO_DIR).catch(() => [])).sort((a, b) => a.localeCompare(b, 'vi', { numeric: true }))) {
+  if (!/\.(jpe?g|png|webp|avif)$/i.test(f)) continue;
+  const kb = Math.round((await stat(join(PHOTO_DIR, f))).size / 1024);
+  if (kb > 700) console.warn(`Ảnh ${f} nặng ${kb} KB: nên thu nhỏ còn cạnh dài khoảng 1600px, dưới 500 KB để khách mở nhanh.`);
+  photos.push('anh-cuoi/' + encodeURIComponent(f));
+}
+await mkdir(join(DIST, 'anh-cuoi'), { recursive: true });
+await writeFile(join(DIST, 'anh-cuoi', 'danh-sach.json'), JSON.stringify(photos));
+if (photos.length) console.log(`Ảnh cưới: ${photos.length} ảnh trong site/anh-cuoi/.`);
 
 const tpl = await readFile(join(ROOT, 'templates', 'thiep.html'), 'utf8');
 const { groom, bride, date } = data.cfg;

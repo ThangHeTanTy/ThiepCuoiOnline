@@ -283,3 +283,32 @@ body.guest-mode{background-color:var(--lacquer);background-image:url("data:image
   .details > .wave:first-child{display:none}
 }
 @media (min-width:1080px) and (max-height:700px){.cover .countdown{display:none}}
+
+/* ---------- nút nhạc nền (nổi ở góc, thấy cả khi thiệp còn đóng) ---------- */
+.music-btn{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:120;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:var(--gold);background:rgba(74,10,15,.88);border:1px solid var(--gold);box-shadow:0 4px 16px rgba(0,0,0,.35);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.music-btn .slash{display:none}
+.music-btn.off{color:var(--muted);border-color:var(--muted)}
+.music-btn.off .slash{display:block}
+.music-btn.playing svg{animation:music-bob 1.6s ease-in-out infinite}
+.music-btn.playing::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid var(--gold);opacity:.6;animation:music-ring 2.4s ease-out infinite}
+@keyframes music-bob{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-2px) rotate(6deg)}}
+@keyframes music-ring{from{transform:scale(1);opacity:.6}to{transform:scale(1.35);opacity:0}}
+.toast{bottom:calc(76px + env(safe-area-inset-bottom))}
+
+/* ---------- trình chiếu ảnh cưới (toàn màn hình, ảnh dọc hay ngang đều hiện trọn, nền là chính ảnh làm mờ) ---------- */
+.slides{position:fixed;inset:0;z-index:100;background:#1a0406;opacity:0;transition:opacity .6s ease;overflow:hidden}
+.slides.in{opacity:1}
+.slides.out{opacity:0}
+.slides-stage{position:absolute;inset:0;cursor:pointer}
+.slide{position:absolute;inset:0;margin:0;opacity:0;transition:opacity 1s ease}
+.slide.on{opacity:1}
+.slide-bg{position:absolute;inset:-60px;background:center/cover no-repeat;filter:blur(30px) brightness(.5)}
+.slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.slide.on img{animation:kenburns 5s ease-out both}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.05)}}
+.slides-bars{position:absolute;z-index:2;top:calc(12px + env(safe-area-inset-top));left:16px;right:16px;display:flex;gap:4px;pointer-events:none}
+.slides-bars span{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.28);overflow:hidden}
+.slides-bars i{display:block;height:100%;width:0;background:var(--gold)}
+.slides-skip{position:absolute;z-index:2;top:calc(28px + env(safe-area-inset-top));right:16px;padding:7px 14px;border-radius:999px;border:1px solid rgba(230,194,122,.8);background:rgba(26,4,6,.55);color:var(--gold);font-size:13.5px;cursor:pointer}
+.slides-names{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:56px 76px calc(24px + env(safe-area-inset-bottom));text-align:center;font-family:var(--display);font-style:italic;font-size:clamp(26px,4vw,40px);color:var(--rice);background:linear-gradient(transparent,rgba(0,0,0,.55));pointer-events:none;text-shadow:0 2px 12px rgba(0,0,0,.5)}
+.slides-names span{color:var(--gold);font-style:normal}

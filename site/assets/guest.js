@@ -250,17 +250,140 @@
     $('#cpMemo').onclick = () => copy(memo, 'Đã sao chép nội dung chuyển khoản');
   }
 
+  /* ---------- nhạc nền: phát khi khách chạm con dấu; nút bật/tắt nổi ở góc màn hình ---------- */
+  const MUSIC_KEY = 'thiep-nhac';
+  const NOTE = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 18.5V6.2l10-2.2v11.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="6.6" cy="18.5" r="2.6" fill="currentColor"/><circle cx="16.6" cy="15.8" r="2.6" fill="currentColor"/><path class="slash" d="M3.5 3.5l17 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+  const music = {
+    a: null, src: '', btn: null, started: false, fadeT: null,
+    want: (() => { try { return localStorage.getItem(MUSIC_KEY) !== 'off'; } catch (e) { return true; } })(),
+    setup(cfg) {
+      const v = String(cfg.music || '').trim();
+      if (/^(tắt|tat|off|không|khong)$/i.test(v)) return; // chủ thiệp tắt nhạc trong Sheet
+      this.src = /^https?:\/\//.test(v) ? v : CFG.assetBase + 'nhac-nen.mp3';
+      const b = this.btn = document.createElement('button');
+      b.type = 'button'; b.className = 'music-btn'; b.innerHTML = NOTE; b.onclick = () => this.toggle();
+      document.body.appendChild(b); this.paint();
+      document.addEventListener('visibilitychange', () => { // tạm dừng khi khách chuyển ứng dụng
+        if (!this.a || !this.started) return;
+        if (document.hidden) this.a.pause(); else if (this.want) this.a.play().catch(() => { });
+      });
+    },
+    play() { // gọi trong lúc khách chạm (con dấu, nút nhạc) để trình duyệt cho phép phát tiếng
+      if (!this.src || !this.want) return;
+      if (!this.a) {
+        this.a = new Audio(this.src); this.a.loop = true; this.a.volume = 0;
+        ['playing', 'pause'].forEach(ev => this.a.addEventListener(ev, () => this.paint()));
+      }
+      this.started = true;
+      const p = this.a.play();
+      if (p) p.then(() => this.fade(0.6)).catch(() => this.waitTouch());
+    },
+    waitTouch() { // trình duyệt chặn tự phát (ví dụ tải lại trang): phát ở lần chạm kế tiếp
+      const go = e => {
+        if (this.btn && this.btn.contains(e.target)) return;
+        document.removeEventListener('pointerdown', go, true); document.removeEventListener('keydown', go, true); this.play();
+      };
+      document.addEventListener('pointerdown', go, true); document.addEventListener('keydown', go, true);
+    },
+    fade(to) {
+      clearInterval(this.fadeT); const a = this.a;
+      this.fadeT = setInterval(() => { a.volume = Math.min(to, a.volume + 0.04); if (a.volume >= to) clearInterval(this.fadeT); }, 100);
+    },
+    toggle() {
+      if (this.want && this.started && this.a && this.a.paused) { this.play(); return; } // đang bị chặn: chạm nút để phát
+      this.want = !this.want;
+      try { localStorage.setItem(MUSIC_KEY, this.want ? 'on' : 'off'); } catch (e) { }
+      if (this.want) { if (opened) this.play(); } else if (this.a) this.a.pause();
+      this.paint();
+      toast(this.want ? 'Đã bật nhạc nền' : 'Đã tắt nhạc nền');
+    },
+    paint() {
+      if (!this.btn) return;
+      const playing = !!(this.a && !this.a.paused);
+      this.btn.classList.toggle('off', !this.want); this.btn.classList.toggle('playing', playing);
+      this.btn.setAttribute('aria-pressed', String(this.want));
+      this.btn.title = this.want ? 'Tắt nhạc nền' : 'Bật nhạc nền';
+      this.btn.setAttribute('aria-label', this.btn.title);
+    }
+  };
+
+  /* ---------- ảnh cưới: trình chiếu sau khi mở phong bì, hết ảnh thì vào ruột thiệp ---------- */
+  let PHOTOS = [], photosReady = Promise.resolve();
+  function photoUrl(u) {
+    u = String(u || '').trim(); if (!u) return '';
+    const id = (/drive\.google\.com\/file\/d\/([\w-]+)/.exec(u) || /drive\.google\.com\/(?:open|uc)\?(?:.*&)?id=([\w-]+)/.exec(u) || [])[1];
+    if (id) return `https://lh3.googleusercontent.com/d/${id}=w1600`; // link chia sẻ Google Drive -> link ảnh
+    return /^https?:\/\//.test(u) ? u : CFG.assetBase + '../' + u.replace(/^\/+/, '');
+  }
+  async function loadPhotos(cfg) {
+    let folder = [];
+    try { const r = await fetch(CFG.assetBase + '../anh-cuoi/danh-sach.json', { cache: 'no-cache' }); if (r.ok) folder = (await r.json()).map(photoUrl); } catch (e) { }
+    const sheet = (cfg.photos || []).map(photoUrl).filter(Boolean);
+    PHOTOS = DEMO && folder.length ? folder : folder.concat(sheet); // bản thử: có ảnh thật trong site/anh-cuoi/ thì thay ảnh mẫu
+    if (PHOTOS[0]) new Image().src = PHOTOS[0]; // tải trước ảnh đầu trong lúc khách còn ở phong bì
+  }
+  function slideshow(done) {
+    const c = S.cfg, n = PHOTOS.length, DUR = 4000;
+    const el = document.createElement('div');
+    el.className = 'slides'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-label', `Ảnh cưới ${c.groom} và ${c.bride}`);
+    el.innerHTML = `<div class="slides-bars" aria-hidden="true">${PHOTOS.map(() => '<span><i></i></span>').join('')}</div>
+      <div class="slides-stage"></div>
+      <button type="button" class="slides-skip">Bỏ qua <span aria-hidden="true">›</span></button>
+      <div class="slides-names">${esc(c.groom)} <span>&amp;</span> ${esc(c.bride)}</div>`;
+    document.body.appendChild(el);
+    const stage = el.querySelector('.slides-stage'), bars = [...el.querySelectorAll('.slides-bars i')];
+    const slides = PHOTOS.map(src => {
+      const f = document.createElement('figure'); f.className = 'slide';
+      f.innerHTML = '<div class="slide-bg"></div><img alt="">'; stage.appendChild(f); return { f, src, ready: null };
+    });
+    const load = k => {
+      const s = slides[k]; if (!s) return Promise.resolve(false);
+      return s.ready || (s.ready = new Promise(res => {
+        const img = s.f.querySelector('img'); img.onload = () => res(true); img.onerror = () => res(false); img.src = s.src;
+        s.f.querySelector('.slide-bg').style.backgroundImage = `url("${s.src.replace(/["\\]/g, '\\$&')}")`;
+      }));
+    };
+    let cur = -1, timer = null, seq = 0, finished = false;
+    async function go(k) {
+      clearTimeout(timer); const my = ++seq;
+      if (k >= n) return finish();
+      k = Math.max(0, k);
+      const ok = await Promise.race([load(k), new Promise(r => setTimeout(() => r(true), 6000))]);
+      if (finished || my !== seq) return;
+      if (!ok) return go(k + 1); // ảnh lỗi: bỏ qua
+      load(k + 1);
+      slides.forEach((s, j) => s.f.classList.toggle('on', j === k));
+      bars.forEach((b, j) => { b.style.transition = 'none'; b.style.width = j < k ? '100%' : '0'; });
+      void bars[k].offsetWidth; bars[k].style.transition = `width ${DUR}ms linear`; bars[k].style.width = '100%';
+      cur = k; timer = setTimeout(() => go(k + 1), DUR);
+    }
+    function finish() {
+      if (finished) return; finished = true; clearTimeout(timer);
+      document.removeEventListener('keydown', onKey); el.classList.add('out');
+      setTimeout(() => { el.remove(); done(); }, still ? 0 : 700);
+    }
+    function onKey(e) { if (e.key === 'Escape') finish(); else if (e.key === 'ArrowRight') go(cur + 1); else if (e.key === 'ArrowLeft') go(cur - 1); }
+    el.querySelector('.slides-skip').onclick = finish;
+    stage.onclick = e => { const r = stage.getBoundingClientRect(); go(e.clientX - r.left < r.width / 3 ? cur - 1 : cur + 1); }; // chạm trái: ảnh trước, chạm phải: ảnh sau
+    document.addEventListener('keydown', onKey);
+    requestAnimationFrame(() => el.classList.add('in'));
+    el.querySelector('.slides-skip').focus({ preventScroll: true });
+    go(0);
+  }
+
   function openCard() {
     if (opened) return;
     opened = true;
     try { sessionStorage.setItem(OPEN_KEY, '1'); } catch (e) { }
+    music.play();
     $('#env').classList.add('opened');
     const show = () => {
-      $('#env').hidden = true; $('#app').classList.remove('sealed');
+      $('#app').classList.remove('sealed');
       const ins = $('#inside'); ins.hidden = false; ins.classList.add('reveal');
       scrollTo(0, 0); $('#top').focus({ preventScroll: true });
     };
-    if (still) show(); else setTimeout(show, 900);
+    const next = () => { $('#env').hidden = true; photosReady.then(() => PHOTOS.length ? slideshow(show) : show()); };
+    if (still) next(); else setTimeout(next, 900);
   }
 
   function bind() {
@@ -295,6 +418,8 @@
       const data = await load();
       if (!data.ok) throw new Error(data.error);
       S = data; render();
+      music.setup(S.cfg); photosReady = loadPhotos(S.cfg);
+      if (opened) music.play(); // đã mở trong phiên này: phát lại nhạc khi trình duyệt cho phép
       if (opened && location.hash) { const t = document.querySelector(location.hash); if (t) t.scrollIntoView(); }
       const k = 'viewed-' + CODE;
       if (!DEMO && !sessionStorage.getItem(k)) { sessionStorage.setItem(k, '1'); send('view', {}).catch(() => { }); }

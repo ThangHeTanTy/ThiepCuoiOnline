@@ -9,6 +9,8 @@
   "showCrest": true,
   "siteUrl": "https://ten-ban.github.io/thiep-cuoi-online/",
   "livestream": "https://www.youtube.com/",
+  "music": "",
+  "photos": ["assets/anh-mau/1.jpg", "assets/anh-mau/2.jpg", "assets/anh-mau/3.jpg"],
   "helperName": "Anh Hoàng (em trai chú rể)",
   "helperPhone": "0905 000 111",
   "parents": {
