@@ -56,6 +56,8 @@ function setup() {
       ['hien_huy_hieu', true, 'TRUE: hiện hình rồng phượng nét vàng dưới phong bì; FALSE: ẩn'],
       ['dia_chi_trang', 'https://ten-ban.github.io/thiep-cuoi-online/', 'Địa chỉ gốc của trang (có dấu / ở cuối). Link khách = địa chỉ này + m/<mã>/'],
       ['livestream', '', 'Link xem trực tiếp, để trống thì ẩn mục này'],
+      ['nhac_nen', '', 'Nhạc nền khi mở thiệp. Để trống: Canon in D (mặc định). Dán link file .mp3 để đổi bài. Ghi "tắt" để không dùng nhạc'],
+      ['anh_cuoi', '', 'Ảnh cưới trình chiếu khi mở thiệp: mỗi dòng một link ảnh (Google Drive để chế độ "Bất kỳ ai có đường liên kết"). Có thể chép ảnh vào thư mục site/anh-cuoi/ thay cho cách này'],
       ['nguoi_ho_tro', 'Anh Hoàng (em trai chú rể)', 'Người hỗ trợ khách ở xa'],
       ['sdt_ho_tro', '0905 000 111', 'Số điện thoại hỗ trợ'],
       ['nha_trai_bo_me', 'Ông Nguyễn Văn Thành\nBà Lê Thị Hoa', 'Mỗi người một dòng (Alt+Enter để xuống dòng)'],
@@ -175,7 +177,9 @@ function readConfig_() {
   return {
     groom: str_(kv.chu_re), bride: str_(kv.co_dau), date: dateStr_(kv.ngay_cuoi), lunar: str_(kv.am_lich),
     rsvpBy: dateStr_(kv.han_xac_nhan), expected: Number(kv.so_khach_du_kien) || 0, showCrest: kv.hien_huy_hieu === '' ? true : bool_(kv.hien_huy_hieu),
-    siteUrl: site, livestream: str_(kv.livestream), helperName: str_(kv.nguoi_ho_tro), helperPhone: str_(kv.sdt_ho_tro),
+    siteUrl: site, livestream: str_(kv.livestream), music: str_(kv.nhac_nen),
+    photos: str_(kv.anh_cuoi).split(/[\n,;]+/).map(s => s.trim()).filter(s => /^https?:\/\//.test(s)),
+    helperName: str_(kv.nguoi_ho_tro), helperPhone: str_(kv.sdt_ho_tro),
     parents: { trai: { names: str_(kv.nha_trai_bo_me), place: str_(kv.nha_trai_dia_chi) }, gai: { names: str_(kv.nha_gai_bo_me), place: str_(kv.nha_gai_dia_chi) } },
     bank: { trai: bank('trai'), gai: bank('gai') }
   };
